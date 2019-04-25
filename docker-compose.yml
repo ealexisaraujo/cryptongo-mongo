@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  # Nombre contenedor
+  cryptongo-agent:
+    # image: platziapp
+    build: .
+    # Variables de entorno
+    environment:
+      MONGO_URL: "mongodb://mongo-crypto:27017/"
+    depends_on:
+      - mongo-crypto
+      - cryptongo-api
+
+  mongo-crypto:
+    image: mongo
+
+  cryptongo-api:
+    build: cryptongo/api/.
+    ports:
+      - "5000:5000"
